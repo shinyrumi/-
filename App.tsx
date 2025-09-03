@@ -36,7 +36,11 @@ const App: React.FC = () => {
 
     } catch (err) {
       console.error(err);
-      setError('콘텐츠 생성 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('콘텐츠 생성 중 알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      }
     } finally {
       setIsLoading(false);
     }

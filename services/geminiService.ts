@@ -2,11 +2,18 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { type AnnouncementInput, Tone, Format } from '../types';
 
-if (!process.env.API_KEY) {
-    throw new Error("API_KEY environment variable is not set.");
-}
+const getAiClient = (): GoogleGenAI => {
+    const apiKey = sessionStorage.getItem('GEMINI_API_KEY');
+    if (!apiKey) {
+        throw new Error(
+            "Gemini API 키가 설정되지 않았습니다.\n" +
+            "F12를 눌러 개발자 콘솔을 열고 아래 명령어를 실행하여 키를 등록해주세요.\n\n" +
+            "sessionStorage.setItem('GEMINI_API_KEY', '여기에_당신의_API_키를_붙여넣으세요')"
+        );
+    }
+    return new GoogleGenAI({ apiKey });
+};
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 function getToneDescription(tone: Tone): string {
     switch (tone) {
@@ -42,6 +49,7 @@ export async function generateAnnouncementText(input: AnnouncementInput): Promis
     `;
 
     try {
+        const ai = getAiClient();
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash",
             contents: prompt,
@@ -74,6 +82,9 @@ export async function generateAnnouncementText(input: AnnouncementInput): Promis
         }
     } catch (error) {
         console.error("Error generating announcement text:", error);
+        if (error instanceof Error) {
+            throw error; // Re-throw the original error to be caught by the UI
+        }
         throw new Error("Failed to generate text from Gemini API.");
     }
 }
@@ -81,6 +92,7 @@ export async function generateAnnouncementText(input: AnnouncementInput): Promis
 
 export async function generateAnnouncementImage(prompt: string): Promise<string> {
     try {
+        const ai = getAiClient();
         const response = await ai.models.generateImages({
             model: 'imagen-4.0-generate-001',
             prompt: prompt,
@@ -99,6 +111,9 @@ export async function generateAnnouncementImage(prompt: string): Promise<string>
         }
     } catch (error) {
         console.error("Error generating image:", error);
+        if (error instanceof Error) {
+            throw error; // Re-throw the original error
+        }
         throw new Error("Failed to generate image from Imagen API.");
     }
 }

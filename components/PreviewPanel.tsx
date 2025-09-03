@@ -51,10 +51,10 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({ content, isLoading, 
         <div className="bg-slate-50 p-4 rounded-lg border min-h-[400px] flex flex-col justify-center">
             {isLoading && <LoadingSkeleton />}
             {error && !isLoading && (
-                <div className="text-center text-red-600">
-                    <ExclamationIcon />
-                    <p className="font-semibold mt-2">오류 발생</p>
-                    <p className="text-sm">{error}</p>
+                <div className="text-center text-slate-700">
+                    <div className="text-red-500"><ExclamationIcon /></div>
+                    <p className="font-semibold mt-2 text-red-600">오류 발생</p>
+                    <p className="text-sm whitespace-pre-wrap mt-2 p-2 bg-red-50 rounded-md">{error}</p>
                 </div>
             )}
             {!isLoading && !error && !content && (
