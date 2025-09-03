@@ -1,0 +1,5 @@
+{
+  "name": "스마트 학교 공지 생성기 (Smart School Announcement Generator)",
+  "description": "학교 행정실 직원을 위해 AI를 활용하여 공지사항 텍스트와 관련 이미지를 신속하게 생성하는 웹 애플리케이션입니다. (A web application for school administrators to quickly generate announcement text and related images using AI.)",
+  "requestFramePermissions": []
+}
