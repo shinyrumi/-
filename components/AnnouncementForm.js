@@ -1,17 +1,10 @@
 import React from 'react';
-import { type AnnouncementInput, Tone, Format } from '../types.js';
+import { Tone, Format } from '../types.js';
 import { SparklesIcon } from './icons/SparklesIcon.js';
 import { LoadingSpinner } from './icons/LoadingSpinner.js';
 
-interface AnnouncementFormProps {
-  input: AnnouncementInput;
-  setInput: React.Dispatch<React.SetStateAction<AnnouncementInput>>;
-  onSubmit: () => void;
-  isLoading: boolean;
-}
-
-export const AnnouncementForm: React.FC<AnnouncementFormProps> = ({ input, setInput, onSubmit, isLoading }) => {
-  const handleInputChange = <K extends keyof AnnouncementInput>(key: K, value: AnnouncementInput[K]) => {
+export const AnnouncementForm = ({ input, setInput, onSubmit, isLoading }) => {
+  const handleInputChange = (key, value) => {
     setInput(prev => ({ ...prev, [key]: value }));
   };
 
@@ -61,7 +54,7 @@ export const AnnouncementForm: React.FC<AnnouncementFormProps> = ({ input, setIn
             <select
               id="tone"
               value={input.tone}
-              onChange={(e) => handleInputChange('tone', e.target.value as Tone)}
+              onChange={(e) => handleInputChange('tone', e.target.value)}
               className="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition bg-white"
             >
               <option value={Tone.FRIENDLY}>친근하게</option>
@@ -74,7 +67,7 @@ export const AnnouncementForm: React.FC<AnnouncementFormProps> = ({ input, setIn
             <select
               id="format"
               value={input.format}
-              onChange={(e) => handleInputChange('format', e.target.value as Format)}
+              onChange={(e) => handleInputChange('format', e.target.value)}
               className="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition bg-white"
             >
               <option value={Format.NEWSLETTER}>가정통신문</option>

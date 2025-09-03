@@ -1,7 +1,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { type AnnouncementInput, Tone, Format } from '../types.js';
+import { Tone, Format } from '../types.js';
 
-const getAiClient = (): GoogleGenAI => {
+const getAiClient = () => {
     const apiKey = sessionStorage.getItem('GEMINI_API_KEY');
     if (!apiKey) {
         throw new Error(
@@ -14,7 +14,7 @@ const getAiClient = (): GoogleGenAI => {
 };
 
 
-function getToneDescription(tone: Tone): string {
+function getToneDescription(tone) {
     switch (tone) {
         case Tone.FORMAL: return '정중하고 격식 있는 톤';
         case Tone.FRIENDLY: return '친근하고 따뜻한 톤';
@@ -23,7 +23,7 @@ function getToneDescription(tone: Tone): string {
     }
 }
 
-function getFormatDescription(format: Format): string {
+function getFormatDescription(format) {
     switch (format) {
         case Format.NEWSLETTER: return '가정통신문 형식 (문단 구분, 상세 설명 포함)';
         case Format.WEB_POST: return '학교 웹사이트 게시물 형식 (간결하고 명확하게)';
@@ -33,7 +33,7 @@ function getFormatDescription(format: Format): string {
 }
 
 
-export async function generateAnnouncementText(input: AnnouncementInput): Promise<{ title: string; content: string }> {
+export async function generateAnnouncementText(input) {
     const prompt = `
         당신은 대한민국 학교 행정실의 유능한 직원입니다. 다음 정보를 바탕으로 지정된 톤과 형식에 맞춰 완벽한 학교 공지사항을 작성해주세요.
         
@@ -89,7 +89,7 @@ export async function generateAnnouncementText(input: AnnouncementInput): Promis
 }
 
 
-export async function generateAnnouncementImage(prompt: string): Promise<string> {
+export async function generateAnnouncementImage(prompt) {
     try {
         const ai = getAiClient();
         const response = await ai.models.generateImages({
@@ -103,7 +103,7 @@ export async function generateAnnouncementImage(prompt: string): Promise<string>
         });
 
         if (response.generatedImages && response.generatedImages.length > 0) {
-            const base64ImageBytes: string = response.generatedImages[0].image.imageBytes;
+            const base64ImageBytes = response.generatedImages[0].image.imageBytes;
             return `data:image/jpeg;base64,${base64ImageBytes}`;
         } else {
             throw new Error("No image was generated.");

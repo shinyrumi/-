@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import { AnnouncementForm } from './components/AnnouncementForm.js';
 import { PreviewPanel } from './components/PreviewPanel.js';
 import { Header } from './components/Header.js';
-import { type AnnouncementInput, type GeneratedAnnouncement, Tone, Format } from './types.js';
+import { Tone, Format } from './types.js';
 import { generateAnnouncementText, generateAnnouncementImage } from './services/geminiService.js';
 
-const App: React.FC = () => {
-  const [announcementInput, setAnnouncementInput] = useState<AnnouncementInput>({
+const App = () => {
+  const [announcementInput, setAnnouncementInput] = useState({
     title: '가정통신문: 여름방학 특별활동 안내',
     target: '학부모 및 학생',
     content: '여름방학을 맞이하여 학생들의 창의력과 탐구심을 증진시키기 위한 다양한 특별활동 프로그램을 마련했습니다. 신청 기간과 방법을 확인해주세요.',
     tone: Tone.FRIENDLY,
     format: Format.NEWSLETTER,
   });
-  const [generatedContent, setGeneratedContent] = useState<GeneratedAnnouncement | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [generatedContent, setGeneratedContent] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleGenerate = async () => {
     setIsLoading(true);

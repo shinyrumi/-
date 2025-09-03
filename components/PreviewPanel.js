@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
-import { type GeneratedAnnouncement } from '../types.js';
 import { ClipboardIcon } from './icons/ClipboardIcon.js';
 import { CheckIcon } from './icons/CheckIcon.js';
 import { DownloadIcon } from './icons/DownloadIcon.js';
 import { ExclamationIcon } from './icons/ExclamationIcon.js';
 
-interface PreviewPanelProps {
-  content: GeneratedAnnouncement | null;
-  isLoading: boolean;
-  error: string | null;
-}
-
-const LoadingSkeleton: React.FC = () => (
+const LoadingSkeleton = () => (
     <div className="animate-pulse">
         <div className="h-64 bg-slate-200 rounded-lg w-full mb-4"></div>
         <div className="h-8 bg-slate-200 rounded w-3/4 mb-4"></div>
@@ -23,7 +16,7 @@ const LoadingSkeleton: React.FC = () => (
     </div>
 );
 
-export const PreviewPanel: React.FC<PreviewPanelProps> = ({ content, isLoading, error }) => {
+export const PreviewPanel = ({ content, isLoading, error }) => {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = () => {
