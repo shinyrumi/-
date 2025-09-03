@@ -1,10 +1,10 @@
 
 import React, { useState } from 'react';
-import { type GeneratedAnnouncement } from '../types';
-import { ClipboardIcon } from './icons/ClipboardIcon';
-import { CheckIcon } from './icons/CheckIcon';
-import { DownloadIcon } from './icons/DownloadIcon';
-import { ExclamationIcon } from './icons/ExclamationIcon';
+import { type GeneratedAnnouncement } from '../types.ts';
+import { ClipboardIcon } from './icons/ClipboardIcon.tsx';
+import { CheckIcon } from './icons/CheckIcon.tsx';
+import { DownloadIcon } from './icons/DownloadIcon.tsx';
+import { ExclamationIcon } from './icons/ExclamationIcon.tsx';
 
 interface PreviewPanelProps {
   content: GeneratedAnnouncement | null;

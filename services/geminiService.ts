@@ -1,6 +1,6 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
-import { type AnnouncementInput, Tone, Format } from '../types';
+import { type AnnouncementInput, Tone, Format } from '../types.ts';
 
 const getAiClient = (): GoogleGenAI => {
     const apiKey = sessionStorage.getItem('GEMINI_API_KEY');

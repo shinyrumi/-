@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { type AnnouncementInput, Tone, Format } from '../types';
-import { SparklesIcon } from './icons/SparklesIcon';
-import { LoadingSpinner } from './icons/LoadingSpinner';
+import { type AnnouncementInput, Tone, Format } from '../types.ts';
+import { SparklesIcon } from './icons/SparklesIcon.tsx';
+import { LoadingSpinner } from './icons/LoadingSpinner.tsx';
 
 interface AnnouncementFormProps {
   input: AnnouncementInput;

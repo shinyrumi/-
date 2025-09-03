@@ -1,10 +1,10 @@
 
 import React, { useState } from 'react';
-import { AnnouncementForm } from './components/AnnouncementForm';
-import { PreviewPanel } from './components/PreviewPanel';
-import { Header } from './components/Header';
-import { type AnnouncementInput, type GeneratedAnnouncement, Tone, Format } from './types';
-import { generateAnnouncementText, generateAnnouncementImage } from './services/geminiService';
+import { AnnouncementForm } from './components/AnnouncementForm.tsx';
+import { PreviewPanel } from './components/PreviewPanel.tsx';
+import { Header } from './components/Header.tsx';
+import { type AnnouncementInput, type GeneratedAnnouncement, Tone, Format } from './types.ts';
+import { generateAnnouncementText, generateAnnouncementImage } from './services/geminiService.ts';
 
 const App: React.FC = () => {
   const [announcementInput, setAnnouncementInput] = useState<AnnouncementInput>({
